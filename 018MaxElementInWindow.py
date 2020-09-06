@@ -6,7 +6,21 @@
 # •	8 = max(2, 7, 8)
 # •	8 = max(7, 8, 7)
 # Do this in O(n) time and O(k) space. You can modify the input array in-place and you do not need to store the results. You can simply print them out as you compute them.
-
+def slidingWindowMax(nums, k):
+    j = k+1
+    ans = []
+    ans.append(max(nums[:k]))
+    for i in range(len(nums)-k):
+        new = nums[i+k]
+        old = nums[i]
+        if new>ans[-1]:
+            ans.append(new)
+        else:
+            if ans[-1] == old:
+                ans.append(max(nums[i+1:i+1+k]))
+            else:
+                ans.append(ans[-1])
+    return ans
 def maxinwind(arr,n,k):
     hs=dict()
     res=[]
